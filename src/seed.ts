@@ -108,8 +108,6 @@ const seedProducts = [
 const seedDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI as string);
-        console.log("Conectado a MongoDB");
-
         await preciosEspecialesGonzalez46Model.deleteMany({});
         await articulosGonzalez46Model.deleteMany({});
 
@@ -119,14 +117,10 @@ const seedDB = async () => {
             email: "luis@example.com",
             categoryDiscount: "Tecnología"
         });
-
-
         await articulosGonzalez46Model.insertMany(seedProducts);
         await newDoc.save();
-        console.log("Documento insertado");
-
         mongoose.connection.close();
-        console.log("Conexión cerrada");
+
     } catch (error) {
         console.error("Error insertando documento", error);
         mongoose.connection.close();

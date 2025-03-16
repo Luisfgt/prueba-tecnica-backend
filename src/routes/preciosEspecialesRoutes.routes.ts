@@ -22,12 +22,11 @@ router.post("/auth", async (req, res) => {
             password: password
         });
 
-
-
         if (data) {
             res.status(200).json({
                 success: true,
                 message: "Usuario autenticado",
+                user: data
             })
         } else {
             res.status(401).json({
@@ -54,7 +53,6 @@ router.post("/register", async (req, res) => {
         } = req.body;
 
         const user = await findUserByEmail(email);
-        console.log(user);
 
         if (user) {
             res.status(400).json({
@@ -62,17 +60,18 @@ router.post("/register", async (req, res) => {
                 message: "El usuario ya existe"
             })
         } else {
-            const createArticle = await preciosEspecialesGonzalez46Model.create({
+            const createUser = await preciosEspecialesGonzalez46Model.create({
                 name,
                 password,
                 email,
                 categoryDiscount
             })
 
-            if (createArticle) {
+            if (createUser) {
                 res.status(200).json({
                     success: true,
                     message: "Usuario creado correctamente",
+                    user: createUser
                 })
             } else {
                 res.status(401).json({
