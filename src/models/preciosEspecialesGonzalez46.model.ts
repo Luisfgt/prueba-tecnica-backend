@@ -8,7 +8,8 @@ interface PreciosEspecialesGonzalez46 extends Document {
     categoryDiscount: string;
 }
 
-const discountRandom: number = Math.random() * (1 - 0.1) + 0.1
+//Esta función nos da un porcentaje aleatorio por cada persona que se registre del 1% al 50%
+const discountRandom: number = Math.random() * (0.5 - 0.1) + 0.1
 
 const preciosEspecialesGonzalez46Schema = new mongoose.Schema({
     name: { type: String, required: true },
